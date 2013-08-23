@@ -1,0 +1,17 @@
+%p
+	= @article.pubmed_id
+
+%h2
+	= 'Title: ' + @article.title
+
+%p
+	= 'Authors: ' + @article.author
+
+%hr
+
+%p
+	= link_to 'top', root_path
+
+%font#size:2 Article#show	
+%p Find me in app/views/article/show.html.haml
+	

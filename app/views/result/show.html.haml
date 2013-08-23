@@ -1,0 +1,13 @@
+%h1 Search Result
+%hr
+
+-@articles.each do |article|
+	%p= article.pubmed_id
+	%p= article.title
+	%p= 'Authors: ' + article.author
+	
+	%hr
+
+%p= link_to 'top', root_path
+
+

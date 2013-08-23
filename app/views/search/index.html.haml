@@ -1,0 +1,6 @@
+%h1 Search
+
+%form{:action=> search_result_path(params[:queri]), :method => 'get'}
+	%input{:type => 'textfield', :name=>'queri' }
+	%input{:type => 'submit', :name=>'send'}
+	

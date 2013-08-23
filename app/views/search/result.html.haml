@@ -1,0 +1,15 @@
+%h1 Search Result
+%hr
+
+
+-@articles.each do |article|
+	%table
+		-article.each do |a|
+			%tr
+				-a.each do |k,v|
+					%td= k
+					%td= v
+
+	%hr
+
+%p= link_to 'top', root_path
