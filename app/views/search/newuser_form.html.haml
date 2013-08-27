@@ -1,0 +1,15 @@
+%h1 create user
+
+%form{:action=> search_newuser_path(params[:queri]), :method => 'get'}
+	%table
+		%tr
+			%td userid 
+			%td
+				%input{:type => 'textfield', :name=>'userid' }
+		%tr
+			%td password 
+			%td
+				%input{:type => 'password', :name=>'password' }	
+		%tr
+			%td
+				%input{:type => 'submit', :name=>'send'}

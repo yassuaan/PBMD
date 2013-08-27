@@ -1,4 +1,4 @@
-require ('pubmed_api')
+require 'pubmed_api'
 
 class Search
   def initialize(queri, retmax)

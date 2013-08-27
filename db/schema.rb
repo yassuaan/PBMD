@@ -11,13 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822005550) do
+ActiveRecord::Schema.define(:version => 20130827035238) do
 
   create_table "articles", :force => true do |t|
     t.integer  "pubmed_id"
     t.string   "title"
     t.string   "author"
     t.string   "publish"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "records", :force => true do |t|
+    t.string   "queri"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "search_records", :force => true do |t|
+    t.string   "queri"
+    t.string   "username"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_attestations", :force => true do |t|
+    t.string   "user_id"
+    t.string   "password"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

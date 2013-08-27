@@ -23,3 +23,8 @@ unless Article.count > 0 then
     
   }
 end
+
+unless Record.count > 0 then
+  Record.create({:queri => 'cancer'})
+  
+end

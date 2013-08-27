@@ -1,7 +1,15 @@
 Pubmed::Application.routes.draw do
   get "search/result"
+  get "search/detail"
 
   get "search/index"
+
+  get "search/attestation"
+
+  get "search/newuser"
+
+  get "search/attestation_form"
+  get "search/newuser_form"
 
   get "result/show"
 

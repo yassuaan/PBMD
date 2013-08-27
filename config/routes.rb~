@@ -1,5 +1,20 @@
 Pubmed::Application.routes.draw do
+  get "search/result"
+
+  get "search/index"
+
+  get "search/attestation"
+
+  get "search/newuser"
+
+  get "search/attestation_form"
+  get "search/newuser_form"
+
+  get "result/show"
+
   get "article/show"
+  
+  get "top/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -9,6 +9,7 @@
 				-a.each do |k,v|
 					%td= k
 					%td= v
+	%p= link_to 'detail', search_detail_path(article[:pubmed_id])
 
 	%hr
 
