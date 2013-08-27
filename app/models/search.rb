@@ -34,5 +34,4 @@ class Search
     return response
   end
     
-    
 end
