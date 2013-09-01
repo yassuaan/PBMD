@@ -1,11 +1,10 @@
 require 'pubmed_api'
 
 class Search
-  def initialize(queri, retmax)
+  attr_accessor :epall
+  
+  def initialize
     @epall = Pubmed::EPAll.new
- 
-    @epall.keyword = queri
-    @epall.retmax = retmax
     @epall.use(1)
     
   end

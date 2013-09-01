@@ -2,7 +2,12 @@ require 'pubmed_api'
 
 class SearchController < ApplicationController
   def result
-    pub = Search.new(params[:queri], 10)
+    #@retmax = 10
+    pub = Search.new #(params[:queri], 10)
+    pub.epall.keyword = params[:queri]
+    pub.epall.retmax = @retmax
+    pub.epall.esearch.retstart = 20
+    
     @articles = pub.search
     
     # save queri record
@@ -40,7 +45,10 @@ class SearchController < ApplicationController
   end
     
   def detail
+    fetch = Detail.new
+    fetch.efetch.id = params[:pid]
     
+    @details = fetch.do
     
   end
     

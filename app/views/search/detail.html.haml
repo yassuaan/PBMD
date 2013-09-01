@@ -1,0 +1,13 @@
+%h1 Result Detail
+%hr
+
+%table
+	-@details.each do |a|
+		%tr
+			-a.each do |k,v|
+				%td= k
+				%td= v
+
+%hr
+
+%p= link_to 'top', root_path
