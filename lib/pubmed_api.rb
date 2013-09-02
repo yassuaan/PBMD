@@ -18,10 +18,9 @@ module Pubmed
       return @result
     end
 
-
+    private
 
     #about url
-    
     def create_url
       queri = create_queri
       api = self.class.name.sub!('Pubmed::', '').downcase!
@@ -178,7 +177,14 @@ module Pubmed
       @retmode = 'xml'
       @root_path = 'PubmedArticle'
     end
-
+    
+    def abst
+      abst = []
+      @result[0][:MedlineCitation][:Article][:Abstract].each{|k| abst << k[:AbstractText] }
+      res = abst.join("")
+      return res
+    end
+    
   end # class EFetch
   
   class ESpell < EPubmed
@@ -249,12 +255,12 @@ module Pubmed
   
 end
 
-=begin
-epall = Pubmed::ESummary.new
+#=begin
+#epall = Pubmed::EFetch.new
+#epall.id = '23272249'
+#epall.do
+#abs = epall.abst
+#puts abs
+#=end
 #epall.keyword = 'cancer'
 #epall.use(2)
-epall.id = '23272249'
-res = epall.do
-
-puts res
-=end
