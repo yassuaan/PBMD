@@ -2,6 +2,7 @@
 
 %form{:action=> search_result_path(params[:queri]), :method => 'get'}
 	%input{:type => 'hidden', :name=>'uname', :value=>@uname}
+	%input{:type => 'hidden', :name=>'retstart', :value=>0}
 	%input{:type => 'textfield', :name=>'queri' }
 	%input{:type => 'submit', :name=>'send'}
 

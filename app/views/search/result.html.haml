@@ -13,4 +13,9 @@
 
 	%hr
 
+%p= link_to 'prev', search_result_path(:queri => params[:queri], :uname => params[:uname], :retstart => @retstart, :page => 'prev')
+
+%p= link_to 'next', search_result_path(:queri => params[:queri], :uname => params[:uname], :retstart => @retstart, :page => 'next')
+
+%hr
 %p= link_to 'top', root_path

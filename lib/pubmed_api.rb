@@ -181,6 +181,7 @@ module Pubmed
     def abst
       abst = []
       @result[0][:MedlineCitation][:Article][:Abstract].each{|k| abst << k[:AbstractText] }
+      #abst = @result.first[:MedlineCitation][:Article][:Abstract][:AbstractText]
       res = abst.join("")
       return res
     end
@@ -256,11 +257,11 @@ module Pubmed
 end
 
 #=begin
-#epall = Pubmed::EFetch.new
-#epall.id = '23272249'
-#epall.do
-#abs = epall.abst
-#puts abs
+epall = Pubmed::EFetch.new
+epall.id = '23272249'
+epall.do
+abs = epall.abst
+puts abs
 #=end
 #epall.keyword = 'cancer'
 #epall.use(2)
