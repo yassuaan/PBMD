@@ -7,8 +7,17 @@
 	%input{:type => 'submit', :name=>'send'}
 
 %hr
-%p= link_to "Sign in", search_attestation_form_path
-%p= @uname
+
+-if @uname
+	%table
+		%tr
+			%td user id : 
+			%td= @uname
+	%p= link_to 'Log out', search_attestation_path(:logout => 'logout')
+	
+-else
+	%p= link_to "Sign in", search_attestation_form_path
+
 
 %hr 
 %p 履歴	

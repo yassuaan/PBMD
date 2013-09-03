@@ -35,7 +35,11 @@ class SearchController < ApplicationController
     
   end
   
-  def attestation    
+  def attestation
+    if params[:logout]
+      redirect_to search_index_path
+    end
+     
     att = Attestation.new
     att.requestId = params[:userid]
     att.requestPass = params[:password]
