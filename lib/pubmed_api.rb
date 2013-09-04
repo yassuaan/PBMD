@@ -3,11 +3,12 @@
 require 'rexml/document'
 require 'open-uri'
 require 'rubygems'
-#require 'active_support/core_ext'
 
 module Pubmed
   class EPubmed
+    P_DATABASE = 'pubmed'
     def do
+      @db = P_DATABASE
       @result = nil
       url = create_url
       
@@ -18,9 +19,7 @@ module Pubmed
       return @result
     end
 
-    private
-
-    #about url
+    #about url    
     def create_url
       queri = create_queri
       api = self.class.name.sub!('Pubmed::', '').downcase!
@@ -104,21 +103,14 @@ module Pubmed
   
   class ESearch < EPubmed
     attr_accessor :keyword
-    attr_accessor :retstart
+    attr_accessor :retstart #use next
     attr_accessor :retmax
     attr_accessor :rettype
     attr_accessor :datetype
     attr_accessor :mindate, :maxdate
     
-    def initialize
-      @db = "pubmed"
-      @keyword
-      @retstart = 0  # use next
-      @retmax 
-      @rettype
-      @datetype
-      @mindate
-      @maxdate
+    def initialize(keyword=nil)
+      @keyword = keyword if keyword
       @root_path = '!DOCTYPE'
     end
     
@@ -127,32 +119,13 @@ module Pubmed
         res = self.do 
       end
       
+      buf = [res.first[:IdList]].flatten
       idlist = []
-      res.first[:IdList].each{|ids|
-        idlist << ids[:Id]
-      
+      buf.each{|ids|
+        idlist << ids[:Id]      
       }
-#      puts idlist
       return idlist
-    end
-    
-    def page_do(next_page=true , res_type=2)
-      idlist = self.do_output_idlists
-      if next_page
-        @retstart += @retmax
-      else
-        @retstart -= @retmax
-      end
       
-#      puts @retstart
-      
-      if res_type == 1
-        result = self.do
-      elsif res_type == 2
-        result = self.do_output_idlists
-      end
-      
-      return result
     end
     
   end # class ESearch
@@ -161,8 +134,6 @@ module Pubmed
     attr_accessor :id
     
     def initialize
-      @db = "pubmed"
-      @id 
       @root_path = 'DocSum'
     end
     
@@ -172,28 +143,24 @@ module Pubmed
     attr_accessor :id
     
     def initialize
-      @db = "pubmed"
-      @id 
       @retmode = 'xml'
       @root_path = 'PubmedArticle'
     end
     
-    def abst
-      abst = []
-      @result[0][:MedlineCitation][:Article][:Abstract].each{|k| abst << k[:AbstractText] }
-      #abst = @result.first[:MedlineCitation][:Article][:Abstract][:AbstractText]
-      res = abst.join("")
-      return res
+    def abst(id)
+      @id = id
+      self.do
+      abst = @result.first[:MedlineCitation][:Article][:Abstract][:AbstractText]
+
     end
-    
+
+
   end # class EFetch
   
   class ESpell < EPubmed
     attr_accessor :keyword
     
     def initialize
-      @db = "pubmed"
-      @keyword
       @retmode = 'xml'
       @root_path = '!DOCTYPE'
     end
@@ -201,67 +168,53 @@ module Pubmed
     
   end # class ESpell
   
-  class EPAll #< EPubmed
+  class EPAll
+    RET_MAX = 10
     attr_accessor :keyword ,:retmax
     attr_accessor :esearch
     
-    def initialize
+    def initialize(keyword=nil)
+      @keyword = keyword if keyword
+      @retmax = RET_MAX
       @esearch = ESearch.new
+      @esummary = ESummary.new
+      @efetch = EFetch.new
       
-      @keyword
-      @retmax = 20
-      @root_path = '!DOCTYPE'
-    end
-    
-    def use(api=1)
-      if api == 1
-        @eapi = ESummary.new
-      elsif api == 2
-        @eapi = EFetch.new
-      end
-#      print("use : ", @eapi.class, "\n")
     end
     
     def do
       @esearch.keyword = @keyword
       @esearch.retmax = @retmax
       idlist = @esearch.do_output_idlists
+      details = []
+
+      idlist.each{|id| details << Detail.new(id) }
       
-      return api_do(idlist)
-    end
-    
-    def next
-      idlist = @esearch.page_do(true)
-      
-      return api_do(idlist)
-    end
-    
-    def prev
-      idlist = @esearch.page_do(false)
-      
-      return api_do(idlist)
-    end
-    
-    def api_do(idlist)
-      @eapi.id = idlist
-      result = @eapi.do
-      return result
-    end
-    
-    def search_check
-      return @esearch.do
+      return details
     end
     
   end
   
+  class Detail
+    attr_reader :id, :detail
+    
+    def initialize(id)
+      @id = id
+      
+    end
+    
+    def create_detail
+      esummary = ESummary.new
+      efetch = EFetch.new
+      
+      esummary.id = @id
+      result = esummary.do
+      
+      abst = efetch.abst(@id)
+      
+      @detail = result.first.merge(:abst => abst)
+    end
+    
+  end
+    
 end
-
-#=begin
-epall = Pubmed::EFetch.new
-epall.id = '23272249'
-epall.do
-abs = epall.abst
-puts abs
-#=end
-#epall.keyword = 'cancer'
-#epall.use(2)
