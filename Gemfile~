@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# add
+gem 'devise'
+
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -38,7 +41,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'haml-rails'
-gruop :development do
+group :development do
       gem "html2haml"
       gem 'erb2haml'
 end
