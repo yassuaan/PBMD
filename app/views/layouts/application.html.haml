@@ -7,3 +7,16 @@
     = csrf_meta_tags
   %body
     = yield
+
+// use devise		
+.notice
+= notice
+.alert
+= alert
+
+%p{:style => "float: right;"}
+  - if user_signed_in?
+    = link_to "logout", destroy_user_session_path, :method => :delete
+  - else
+    = link_to "login", new_user_session_path
+

@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# add
+gem 'devise'
+
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:

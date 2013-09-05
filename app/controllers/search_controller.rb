@@ -1,6 +1,8 @@
 require 'pubmed_api'
 
 class SearchController < ApplicationController
+  before_filter :authenticate_user!  
+
   def result
     retmax = 10
     @retstart = params[:retstart]

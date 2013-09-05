@@ -1,4 +1,6 @@
 Pubmed::Application.routes.draw do
+  devise_for :users
+
   get "search/result"
   get "search/detail"
 
