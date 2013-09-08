@@ -19,7 +19,7 @@ class SearchController < ApplicationController
       
     else
       # save queri record
-      record = SearchRecord.new({:queri => params[:queri], :username => params[:uname]} )
+      record = SearchRecord.new({:queri => params[:queri], :username => current_user.username} )
       record.save
     
     end
@@ -30,10 +30,8 @@ class SearchController < ApplicationController
   end
   
   def index
-    @record = SearchRecord.find(:all, :conditions => {:username => params[:uname]} )
+    @record = SearchRecord.find(:all, :conditions => {:username => current_user.username} )
     @record.reverse!
-    
-    @uname = params[:uname]
     
   end
   

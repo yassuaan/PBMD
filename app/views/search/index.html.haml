@@ -1,23 +1,9 @@
 %h1 Search
 
 %form{:action=> search_result_path(params[:queri]), :method => 'get'}
-	%input{:type => 'hidden', :name=>'uname', :value=>@uname}
 	%input{:type => 'hidden', :name=>'retstart', :value=>0}
 	%input{:type => 'textfield', :name=>'queri' }
 	%input{:type => 'submit', :name=>'send'}
-
-%hr
-
--if @uname
-	%table
-		%tr
-			%td user id : 
-			%td= @uname
-	%p= link_to 'Log out', search_attestation_path(:logout => 'logout')
-	
--else
-	%p= link_to "Sign in", search_attestation_form_path
-
 
 %hr 
 %p 履歴	

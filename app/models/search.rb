@@ -5,7 +5,7 @@ class Search
   
   def initialize
     @epall = Pubmed::EPAll.new
-    @epall.use(1)
+    #@epall.use(1)
     
   end
   
@@ -18,7 +18,8 @@ class Search
   
   def structure(result)
     response = []
-    result.each{|res|
+    result.each{|resu|
+      res = resu.create_detail
       authors = []
       tmp = [res[:AuthorList]].flatten # return hash when only one author (want to return array)
       tmp.each{|a| authors << a[:Author] }

@@ -1,9 +1,9 @@
 Pubmed::Application.routes.draw do
   
 
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-
   devise_for :users
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   get "search/result"
   get "search/detail"
