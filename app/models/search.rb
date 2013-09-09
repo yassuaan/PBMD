@@ -19,7 +19,8 @@ class Search
   def structure(result)
     response = []
     result.each{|resu|
-      res = resu.create_detail
+      resu.create_detail
+      res = resu.detail
       authors = []
       tmp = [res[:AuthorList]].flatten # return hash when only one author (want to return array)
       tmp.each{|a| authors << a[:Author] }

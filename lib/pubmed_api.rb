@@ -150,8 +150,20 @@ module Pubmed
     def abst(id)
       @id = id
       self.do
-      abst = @result.first[:MedlineCitation][:Article][:Abstract][:AbstractText]
-
+      tmp = @result.first[:MedlineCitation][:Article][:Abstract]
+      abst = ''
+      case tmp
+      when ::Hash
+        abst = tmp[:AbstractText]
+        
+      when ::Array
+        tmp.each{|buf|
+          abst += buf[:AbstractText]
+        }
+        
+      end
+      return abst
+      
     end
 
 
