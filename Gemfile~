@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # add
 gem 'devise'
+gem 'rails_admin'
 
 gem 'rails', '3.2.13'
 
