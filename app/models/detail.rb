@@ -27,10 +27,27 @@ class Detail
     response = {:PMID => res[:PMID],
       :Title => art[:ArticleTitle],
       :AuthorList => authors.join(", "),
-      :Abstract => abs[:AbstractText],
+      :Abstract => abst(res),
       :Journal => art[:Journal][:ISOAbbreviation]
     }
     return response
   end
     
+  def abst(res)
+    tmp = res[:Article][:Abstract]
+    abst = ''
+    case tmp
+    when ::Hash
+      abst = tmp[:AbstractText]
+      
+    when ::Array
+      tmp.each{|buf|
+        abst += buf[:AbstractText]
+      }
+      
+    end
+    return abst
+    
+  end
+  
 end
