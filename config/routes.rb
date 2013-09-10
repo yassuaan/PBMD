@@ -22,6 +22,8 @@ Pubmed::Application.routes.draw do
   get "article/show"
   
   get "top/index"
+  
+  get "ranking/queri"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -5,6 +5,7 @@
 	%input{:type => 'textfield', :name=>'queri' }
 	%input{:type => 'submit', :name=>'send'}
 
+%p= link_to "クエリランキング", ranking_queri_path
 %hr 
 %p 履歴	
 -@record.each do |rec|

@@ -8,6 +8,7 @@
 
 require 'pubmed_api'
 
+=begin
 epall = Pubmed::EPAll.new
 epall.keyword = 'cancer'
 epall.retmax = 5
@@ -23,8 +24,13 @@ unless Article.count > 0 then
     
   }
 end
+=end
 
 unless Record.count > 0 then
   Record.create({:queri => 'cancer'})
   
+end
+
+unless QueriRanking.count > 0 then
+  QueriRanking.create([{:queri => 'cancer', :freq => 30}, {:queri => 'apotosis', :freq => 10}, {:queri => 'sport', :freq => 5}])
 end

@@ -26,7 +26,19 @@ class SearchController < ApplicationController
   
     pub.epall.esearch.retstart = @retstart
     @articles = pub.search
-  
+    
+    #rankning
+    querifreq = QueriRanking.where(:queri => params[:queri])
+    case querifreq
+    when []
+      QueriRanking.create({:queri => params[:queri], :freq => 1})
+      
+    else
+      querifreq.each do |qf|
+        qf.update_attribute(:freq, qf.freq+1)
+      end
+    end
+      
   end
   
   def index

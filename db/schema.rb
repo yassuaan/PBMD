@@ -11,13 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130907170404) do
+ActiveRecord::Schema.define(:version => 20130909222833) do
 
   create_table "articles", :force => true do |t|
     t.integer  "pubmed_id"
     t.string   "title"
     t.string   "author"
     t.string   "publish"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "queri_rankings", :force => true do |t|
+    t.string   "queri"
+    t.integer  "freq"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
