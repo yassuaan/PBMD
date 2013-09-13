@@ -10,6 +10,13 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
+gem 'factory_girl_rails'
+gem 'database_cleaner'
+
+gem 'omniauth'
+
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -49,4 +56,11 @@ gem 'haml-rails'
 group :development do
       gem "html2haml"
       gem 'erb2haml'
+end
+
+group :development, :test do
+  gem 'html2haml'
+  gem 'erb2haml'
+  gem 'rspec'
+  gem 'rspec-rails'
 end

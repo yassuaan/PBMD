@@ -4,12 +4,16 @@ class SearchController < ApplicationController
   before_filter :authenticate_user!  
 
   def result
+    unless params[:queri]
+      return 'no information'
+    end
+    
     retmax = 10
     @retstart = params[:retstart]
     pub = Search.new #(params[:queri], 10)
     pub.epall.keyword = params[:queri]
     pub.epall.retmax = retmax
-    
+   
     case params[:page]
     when 'next'
       @retstart = @retstart.to_i + retmax
@@ -19,7 +23,7 @@ class SearchController < ApplicationController
       
     else
       # save queri record
-      record = SearchRecord.new({:queri => params[:queri], :username => current_user.username} )
+      record = SearchRecord.new({:queri => params[:queri], :user_id => current_user.id} )
       record.save
     
     end
@@ -29,10 +33,8 @@ class SearchController < ApplicationController
     
     #rankning
     querifreq = QueriRanking.where(:queri => params[:queri])
-    case querifreq
-    when []
-      QueriRanking.create({:queri => params[:queri], :freq => 1})
-      
+    if querifreq.length == 0
+      QueriRanking.create({:queri => params[:queri], :freq => 1})  
     else
       querifreq.each do |qf|
         qf.update_attribute(:freq, qf.freq+1)
@@ -42,7 +44,7 @@ class SearchController < ApplicationController
   end
   
   def index
-    @record = SearchRecord.find(:all, :conditions => {:username => current_user.username} )
+    @record = SearchRecord.find(:all, :conditions => {:user_id => current_user.id} )
     @record.reverse!
     
   end

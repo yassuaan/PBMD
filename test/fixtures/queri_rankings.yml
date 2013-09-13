@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  queri: MyString
+  freq: 1
+
+two:
+  queri: MyString
+  freq: 1

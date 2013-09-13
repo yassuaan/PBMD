@@ -6,6 +6,13 @@ gem 'rails_admin'
 
 gem 'rails', '3.2.13'
 
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
+gem 'factory_girl_rails'
+gem 'database_cleaner'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -45,4 +52,9 @@ gem 'haml-rails'
 group :development do
       gem "html2haml"
       gem 'erb2haml'
+end
+
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
 end

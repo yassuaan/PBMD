@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909222833) do
+ActiveRecord::Schema.define(:version => 20130911072000) do
 
   create_table "articles", :force => true do |t|
     t.integer  "pubmed_id"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(:version => 20130909222833) do
   end
 
   create_table "search_records", :force => true do |t|
+    t.integer  "user_id"
     t.string   "queri"
-    t.string   "username"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

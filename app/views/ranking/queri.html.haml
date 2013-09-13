@@ -1,0 +1,14 @@
+%h1 Queri Ranking
+
+%hr
+
+-i=1
+-@queris.each do |queri|
+	%table{:border => 'solid', :width => '300'}
+		%tr
+			%td= i
+			%td= queri.queri
+			%td= queri.freq
+				
+	-i+=1
+
