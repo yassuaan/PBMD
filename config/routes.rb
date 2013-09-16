@@ -3,6 +3,8 @@ Pubmed::Application.routes.draw do
 
   devise_for :users
 
+  get "record/index"
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   get "search/result"

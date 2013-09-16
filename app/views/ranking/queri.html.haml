@@ -3,8 +3,8 @@
 %hr
 
 -i=1
--@queris.each do |queri|
-	%table{:border => 'solid', :width => '300'}
+%table{:border => 'solid', :width => '300', :class => 'table table-striped table-bordered table-hover'}
+	-@queris.each do |queri|
 		%tr
 			%td= i
 			%td= queri.queri
