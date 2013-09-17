@@ -19,6 +19,8 @@
     -if params[:stylevariety]
       -test = params[:stylevariety]
       -cookies[:bootstylesheet_favorite] = test
+    -elsif cookies[:bootstylesheet_favorite]
+      -test = cookies[:bootstylesheet_favorite]
     -else
       -test = "cerulean"
 			
