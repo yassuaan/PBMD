@@ -16,16 +16,8 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
 
     / change bootstrap--
-    -if params[:stylevariety]
-      -test = params[:stylevariety]
-      -cookies[:bootstylesheet_favorite] = test
-    -elsif cookies[:bootstylesheet_favorite]
-      -test = cookies[:bootstylesheet_favorite]
-    -else
-      -test = "cerulean"
-			
-    = javascript_include_tag "bootswitch/#{test}/application"
-    = stylesheet_link_tag "bootswitch/#{test}/application", :media => "all"
+    = javascript_include_tag "bootswitch/#{@changeboot}/application"
+    = stylesheet_link_tag "bootswitch/#{@changeboot}/application", :media => "all"
     / -- change bootstrap
 
   %body
