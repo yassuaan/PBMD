@@ -7,8 +7,8 @@
 	-@queris.each do |queri|
 		%tr
 			%td= i
-			%td= queri.queri
-			%td= queri.freq
+			%td= queri[:queri]
+			%td= queri[:freq]
 				
-	-i+=1
+			-i+=1
 
