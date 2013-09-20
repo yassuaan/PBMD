@@ -14,6 +14,10 @@
 
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
+	
+	<%= f.text_field :uid, :value => 21,  :type => :hidden%>
+
+	<%= f.text_field :provider, :value => 'normal',  :type => :hidden%>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

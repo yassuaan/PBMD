@@ -1,7 +1,15 @@
 Pubmed::Application.routes.draw do
   
-
   devise_for :users
+
+  match "/auth/:provider/callback"
+  match "/signout" => "sessions#destroy"
+
+  get "sessions/create"
+
+  get "sessions/destroy"
+
+  get "record/index"
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 

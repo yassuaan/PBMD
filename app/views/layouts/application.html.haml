@@ -34,7 +34,7 @@
               %li= link_to "slate", params.merge(:stylevariety => "slate")
               %li= link_to "cerulean", params.merge(:stylevariety => "cerulean")
               %li= link_to "flatly", params.merge(:stylevariety => "flatly")
-
+      
     .container-fluid
 
       .row-fluid
@@ -49,7 +49,8 @@
             %p= current_user.username
             = link_to "logout", destroy_user_session_path, :method => :delete
           -else
-            = link_to "login", new_user_session_path
+            %li= link_to "login", new_user_session_path
+            %li= link_to "Twitterでログイン", "/auth/twitter"
           %hr
 					
         .span9

@@ -1,7 +1,7 @@
 require 'pubmed_api'
 
 class SearchController < ApplicationController
-  before_filter :authenticate_user!  
+  #before_filter :authenticate_user!  
 
   def result
     unless params[:queri]
@@ -44,7 +44,8 @@ class SearchController < ApplicationController
   end
   
   def index
-    @record = SearchRecord.find(:all, :conditions => {:user_id => current_user.id} )
+    @recort ||= []
+    @record = SearchRecord.find(:all, :conditions => {:user_id => current_user.id} )  
     @record.reverse!
     
   end

@@ -1,7 +1,13 @@
 Pubmed::Application.routes.draw do
   
-
   devise_for :users
+
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy"
+
+  get "sessions/create"
+
+  get "sessions/destroy"
 
   get "record/index"
 

@@ -11,13 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911072000) do
+ActiveRecord::Schema.define(:version => 20130920000708) do
 
   create_table "articles", :force => true do |t|
     t.integer  "pubmed_id"
     t.string   "title"
     t.string   "author"
     t.string   "publish"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "details", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -73,9 +78,11 @@ ActiveRecord::Schema.define(:version => 20130911072000) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "username"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

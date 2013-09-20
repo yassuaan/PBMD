@@ -14,8 +14,8 @@ gem 'factory_girl_rails'
 gem 'database_cleaner'
 
 gem 'omniauth'
-
-
+gem 'omniauth-twitter'
+gem 'figaro'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
