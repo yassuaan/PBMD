@@ -45,7 +45,13 @@ class SearchController < ApplicationController
   
   def index
     @recort ||= []
-    @record = SearchRecord.find(:all, :conditions => {:user_id => current_user.id} )  
+    if current_user
+      buf_id = current_user.id
+    else
+      buf_id = current_user.object_id
+    end
+    
+    @record = SearchRecord.find(:all, :conditions => {:user_id => buf_id} )  
     @record.reverse!
     
   end
