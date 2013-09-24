@@ -23,7 +23,8 @@ class SearchController < ApplicationController
       
     else
       # save queri record
-      record = SearchRecord.new({:queri => params[:queri], :user_id => current_user.id} )
+      buf_id = check_user_id
+      record = SearchRecord.new({:queri => params[:queri], :user_id => buf_id} )
       record.save
     
     end
@@ -45,11 +46,10 @@ class SearchController < ApplicationController
   
   def index
     @recort ||= []
-    if current_user
-      buf_id = current_user.id
-    else
-      buf_id = current_user.object_id
-    end
+    p 'testestssetse'
+    p current_user
+    
+    buf_id = check_user_id
     
     @record = SearchRecord.find(:all, :conditions => {:user_id => buf_id} )  
     @record.reverse!
@@ -88,4 +88,14 @@ class SearchController < ApplicationController
     
   end
     
+  private
+  def check_user_id
+    if current_user
+      buf_id = current_user.id
+    else
+      buf_id = 0 # 0 is situation that not login
+    end
+    return buf_id
+  end
+  
 end

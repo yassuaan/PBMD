@@ -21,15 +21,27 @@ class User < ActiveRecord::Base
   
   def self.create_with_omniauth(auth)
     create! do |user|
-      puts 'aaaaaaaaaa'
-      p auth
+      #puts 'aaaaaaaaaa'
+      #p auth
       
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      buf_email = auth['info']['name'] + '@examples.jjj'
-      user.email = buf_email
-      user.username = auth['info']['nickname']
-      user.password = auth['info']['name']
+      
+      case user.provider
+      when 'twitter'
+        user.username = auth['info']['nickname']
+        user.password = auth['info']['name']
+        buf_email = auth['info']['name'] + '@examples.jjj'
+        user.email = buf_email
+        
+      when 'facebook'
+        user.username = auth['info']['nickname']
+        user.password = auth['info']['last_name']
+        user.email = auth['info']['email']
+        
+
+      end
+      
     end
   end
   
