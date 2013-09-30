@@ -1,5 +1,8 @@
 Pubmed::Application.routes.draw do
   
+
+  get "status/info"
+
   devise_for :users
 
   match "/auth/:provider/callback" => "sessions#create"

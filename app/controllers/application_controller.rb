@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :change_bootstrap
+  before_filter :change_bootstrap, :login_info
   
   helper_method :current_user, :user_signed_in?
 
@@ -13,6 +13,24 @@ class ApplicationController < ActionController::Base
       @changeboot = cookies[:bootstylesheet_favorite]
     else
       @changeboot = "cerulean"
+    end
+    
+  end
+  
+  def login_info
+    case session[:provider]
+    when 'twitter'
+      @provider = ['facebook']
+      
+    when 'facebook'
+      @provider = ['twitter']
+      
+    else
+      status = User.find(session[:user_id])
+      unless status[:facebook_id] && status[:twitter_id]
+        @provider = ['twitter', 'facebook']
+      end
+      
     end
     
   end

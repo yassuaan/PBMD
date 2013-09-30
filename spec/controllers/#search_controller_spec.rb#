@@ -1,0 +1,36 @@
+require 'spec_helper'
+
+describe SearchController do
+
+
+  describe "GET 'index'" do
+    it "returns http success" do
+      get 'index'
+      response.should be_redirect
+    end
+    
+    it "check SearchRecord.find" do
+      record = SearchRecord.find(:all, :conditions => {:username => current_user.username} )
+      expected = 'yasu'
+      
+      expect(record).to eq(expected)
+    end
+    
+  end
+  
+  describe "GET 'result'" do
+    it "returns http success" do
+      get 'result'
+      response.should be_redirect
+    end
+    
+  end
+    
+  describe "GET 'detail'" do
+    it "returns http success" do
+      get 'detail'
+      response.should be_redirect
+    end
+  end
+
+end

@@ -18,6 +18,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'figaro'
 
+gem 'twitter'
 
 
 # Bundle edge Rails instead:

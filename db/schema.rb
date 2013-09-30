@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920000708) do
+ActiveRecord::Schema.define(:version => 20130929071246) do
 
   create_table "articles", :force => true do |t|
     t.integer  "pubmed_id"
@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(:version => 20130920000708) do
   end
 
   create_table "details", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "oauth_facebooks", :force => true do |t|
+    t.string   "fname"
+    t.string   "code"
+    t.string   "token"
+    t.string   "expires"
+    t.string   "fuid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "oauth_twitters", :force => true do |t|
+    t.string   "tname"
+    t.string   "token"
+    t.string   "stoken"
+    t.string   "tuid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -80,9 +99,9 @@ ActiveRecord::Schema.define(:version => 20130920000708) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "uid"
-    t.string   "provider"
     t.string   "username"
+    t.string   "facebook_id"
+    t.string   "twitter_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

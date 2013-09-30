@@ -24,26 +24,21 @@
     .navbar.navbar-fluid-top
       .navbar-inner
         .container-fluid
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span= 'login' unless user_signed_in? 
-            %span= current_user.username if user_signed_in?
           %a.brand(href="#") Pubmed
-          .container.nav-collapse
-            %ul.nav
-              / use devise		
-              /.notice
-              /  = notice
-              /.alert
-              /  = alert
-
+          .dropdown
+            %a.dropdown-toggle(data-toggle='dropdown')
+              %span= 'login menu' unless user_signed_in? 
+              %span= current_user.username if user_signed_in?
+            %ul.dropdown-menu
               -if user_signed_in?
-                %p= current_user.username
-                = link_to "logout", destroy_user_session_path, :method => :delete
+                %li= link_to "ユーザ情報", "/status/info"
+                -@provider.each do |pro|
+                  %li= link_to "#{pro}と連携", "/auth/#{pro}"
+                %li= link_to "logout", destroy_user_session_path, :method => :delete
               -else
                 %li= link_to "login", new_user_session_path
                 %li= link_to "Twitterでログイン", "/auth/twitter"
-                %li= link_to "Facebookでログイン", "/auth/facebook"
-
+                %li= link_to "Facebookでログイン", "/auth/facebook"              
       
     .container-fluid
 
