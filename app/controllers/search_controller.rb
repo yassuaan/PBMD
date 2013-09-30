@@ -1,3 +1,4 @@
+require 'twitter'
 require 'pubmed_api'
 
 class SearchController < ApplicationController
@@ -87,7 +88,21 @@ class SearchController < ApplicationController
     @details = fetch.do
     
   end
+  
+  def do_tweet
+    tuser = OauthTwitter.where(:tuid => User.find(session[:user_id]).twitter_id).first
+    Twitter.configure do |config|
+      config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+      config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+      config.oauth_token = tuser.token
+      config.oauth_token_secret = tuser.stoken
+    end
     
+    tmp = convert_size(params[:text])
+    Twitter.update(tmp)
+    redirect_to search_detail_path(:pid => params[:pid])
+  end
+  
   private
   def check_user_id
     if current_user
@@ -96,6 +111,10 @@ class SearchController < ApplicationController
       buf_id = 0 # 0 is situation that not login
     end
     return buf_id
+  end
+  
+  def convert_size(str)
+    str.slice(0, 120) if str.size > 120
   end
   
 end

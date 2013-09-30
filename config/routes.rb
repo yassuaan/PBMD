@@ -1,6 +1,7 @@
 Pubmed::Application.routes.draw do
   
-
+  get "search/do_tweet"
+  
   get "status/info"
 
   devise_for :users

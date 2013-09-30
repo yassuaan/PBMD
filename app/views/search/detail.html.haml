@@ -8,6 +8,8 @@
 				%td= k
 				%td= v
 
+%a= link_to 'tweetする', search_do_tweet_path(:pid => params[:pid], :text => @details[:Title])
+
 %hr
 
 %p= link_to 'top', root_path
