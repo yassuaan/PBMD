@@ -35,7 +35,9 @@ class SessionsController < ApplicationController
       fuser = OauthTwitter.create_with_omniauth(auth)
       
     end
-      
+    
+    session[:provider] = 'both'  
+    
     redirect_to root_path
     
   end

@@ -221,10 +221,13 @@ module Pubmed
       
       esummary.id = @id
       result = esummary.do
+      #efetch.id = @id
+      #result = efetch.do
       
-      abst = efetch.abst(@id)
+      #abst = efetch.abst(@id)
       
-      @detail = result.first.merge(:abst => abst)
+      #@detail = result.first.merge(:abst => abst)
+      @detail = result.first
     end
     
   end

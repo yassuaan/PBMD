@@ -98,8 +98,8 @@ class SearchController < ApplicationController
       config.oauth_token_secret = tuser.stoken
     end
     
-    tmp = convert_size(params[:text])
-    Twitter.update(tmp)
+    text = convert_size(params[:text])
+    Twitter.update(text)
     redirect_to search_detail_path(:pid => params[:pid])
   end
   
@@ -114,7 +114,8 @@ class SearchController < ApplicationController
   end
   
   def convert_size(str)
-    str.slice(0, 120) if str.size > 120
+    str.slice!(0, 120) if str.size > 120
+    return str
   end
   
 end

@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
   
   def login_info
+     @provider = []
     case session[:provider]
     when 'twitter'
       @provider = ['facebook']
@@ -26,8 +27,9 @@ class ApplicationController < ActionController::Base
       @provider = ['twitter']
       
     else
-      status = User.find(session[:user_id])
-      unless status[:facebook_id] && status[:twitter_id]
+      #status = User.find(session[:user_id])
+      #unless status[:facebook_id] && status[:twitter_id]
+      unless status = User.where(:id => session[:user_id])
         @provider = ['twitter', 'facebook']
       end
       
@@ -39,7 +41,7 @@ class ApplicationController < ActionController::Base
     def current_user
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
-  
+
     def user_signed_in?
       if session[:user_id]
         return true
