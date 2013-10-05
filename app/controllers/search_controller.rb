@@ -103,6 +103,16 @@ class SearchController < ApplicationController
     redirect_to search_detail_path(:pid => params[:pid])
   end
   
+  def do_facebook_put
+    fuser = OauthFacebook.where(:fuid => User.find(session[:user_id]).facebook_id).first
+    puts fuser.token
+    @graph = Koala::Facebook::API.new(fuser.token)
+    #@graph.put_connections("me", "feed", :message => "test")
+    @graph.put_wall_post(params['text'])
+    
+    redirect_to search_detail_path(:pid => params[:pid])
+  end
+  
   private
   def check_user_id
     if current_user

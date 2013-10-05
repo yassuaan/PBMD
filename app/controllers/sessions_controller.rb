@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
     unless session[:user_id]
       case auth['provider']
       when 'facebook'
-        fuser = OauthFacebook.find_first_by_auth_conditions(auth["uid"]) || OauthFacebook.create_with_omniauth(auth)
+        user = OauthFacebook.find_first_by_auth_conditions(auth["uid"]) || OauthFacebook.create_with_omniauth(auth, params)
         user = User.find_first_by_auth_conditions({:facebook_id => auth["uid"]}) || User.create_with_omniauth(auth)
-      
+
       when 'twitter'
         tuser = OauthTwitter.find_first_by_auth_conditions(auth["uid"]) || OauthTwitter.create_with_omniauth(auth)
         user = User.find_first_by_auth_conditions({:twitter_id => auth["uid"]})  || User.create_with_omniauth(auth)

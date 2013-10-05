@@ -20,7 +20,7 @@ gem 'figaro'
 
 gem 'twitter'
 gem 'koala' #facebook
-
+gem 'httpclient'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

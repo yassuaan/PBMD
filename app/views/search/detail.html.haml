@@ -8,7 +8,10 @@
 				%td= k
 				%td= v
 
-%a= link_to 'tweetする', search_do_tweet_path(:pid => params[:pid], :text => @details[:Title])
+%br
+
+%button= link_to 'tweetする', search_do_tweet_path(:pid => params[:pid], :text => @details[:Title])
+%button= link_to 'Facebookに投稿', search_do_facebook_put_path(:pid => params[:pid], :text => @details[:Title])
 
 %hr
 

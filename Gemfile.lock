@@ -81,6 +81,7 @@ GEM
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
     httpauth (0.2.0)
+    httpclient (2.3.4.1)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -250,6 +251,7 @@ DEPENDENCIES
   figaro
   haml-rails
   html2haml
+  httpclient
   jquery-rails
   koala
   less-rails

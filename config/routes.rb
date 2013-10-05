@@ -1,10 +1,11 @@
 Pubmed::Application.routes.draw do
   
+  get "search/do_facebook_put"
   get "search/do_tweet"
   
   get "status/info"
 
-  devise_for :users
+  devise_for :users#, :controllers =>{ :sessions => 'users/sessions', :registrations => 'users/registrations'}
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy"
