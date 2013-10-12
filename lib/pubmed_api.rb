@@ -195,14 +195,21 @@ module Pubmed
     end
     
     def do
-      @esearch.keyword = @keyword
-      @esearch.retmax = @retmax
-      idlist = @esearch.do_output_idlists
+      #@esearch.keyword = @keyword
+      #@esearch.retmax = @retmax
+      #idlist = @esearch.do_output_idlists
+      idlist = idlists_get
       details = []
 
       idlist.each{|id| details << Detail.new(id) }
       
       return details
+    end
+    
+    def idlists_get
+      @esearch.keyword = @keyword
+      @esearch.retmax = @retmax
+      idlist = @esearch.do_output_idlists
     end
     
   end

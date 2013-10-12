@@ -1,0 +1,14 @@
+%h1 Status#Info
+
+%p User の name
+%p= @user.username
+%hr
+
+-if @fuser
+	%p Facebook の name
+	%p= @fuser.fname
+	%hr
+
+-if @tuser
+	%p Twitter の name
+	%p= @tuser.tname

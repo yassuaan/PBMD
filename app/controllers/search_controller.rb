@@ -29,7 +29,7 @@ class SearchController < ApplicationController
       record.save
     
     end
-  
+    
     pub.epall.esearch.retstart = @retstart
     @articles = pub.search
     
